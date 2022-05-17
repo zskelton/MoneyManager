@@ -11,7 +11,8 @@ function About() {
     <div>
       <button type="button" onClick={handleOK}>About</button>
       <dialog open={open} id="about" className="About">
-        <p>Greetings, one and all!</p>
+        <h3>Money Manager v1.0</h3>
+        <p>Skelton Networks &copy;2022</p>
         <form method="dialog">
           <button type="button" onClick={handleOK}>OK</button>
         </form>

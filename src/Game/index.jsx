@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 
 function Game() {
+  // eslint-disable-next-line no-unused-vars
+  const [statusText, setStatusText] = useState('Running...');
   return (
     <div id="layout">
       {/* Header */}
       <Header />
       {/* Body */}
       <div id="body" className="Game">
-        <div id="bank">Bank</div>
-        <div id="status">Status</div>
-        <div id="action">Action</div>
-        <div id="goal">Goal</div>
-        <div id="work">Work</div>
-        <div id="chioces">Choices</div>
-        <div id="date">Date</div>
-        <div id="money">Money</div>
-        <div id="life">Life</div>
+        <div id="game">
+          <div id="container-toprow" className="container">
+            <div id="item_bank" className="item">
+              Bank
+            </div>
+            <div id="item_description" className="item">
+              Description
+            </div>
+            <div id="item_actions" className="item">
+              Actions
+            </div>
+          </div>
+          <div id="container-middlerow" className="container">
+            <div id="item_goals" className="item">
+              Goals
+            </div>
+            <div id="item_work" className="item">
+              Work
+            </div>
+            <div id="item_choices" className="item">
+              Choices
+            </div>
+          </div>
+          <div id="container-bottomrow" className="container">
+            <div id="item_date" className="item">
+              Date
+            </div>
+            <div id="item_money" className="item">
+              Money
+            </div>
+            <div id="item_living" className="item">
+              Living
+            </div>
+          </div>
+        </div>
       </div>
       {/* Footer */}
-      <Footer />
+      <Footer statusText={statusText} />
     </div>
   );
 }

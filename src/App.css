@@ -1,35 +1,83 @@
+/* Whole Page */
 .Layout {
+  background-color: #282c34;
   text-align: center;
   height: 100vh;
-  background-color: #282c34;
+  width: 100vw;
+  overflow: hidden;
 }
 
+/* Header */
 .Header {
   background-color: #f1f1f1;
-  padding: 20px;
-  height: 10%;
-  width: 100%;
-  overflow: hidden;
   display: flex;
+  height: 10%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
 }
+.Header #menu {
+  margin-left: 20px;
+  margin-right: auto;
+}
+.Header #title {
+  flex: 1;
+}
+.Header #about {
+  margin-right: 20px;
+  margin-left: auto;
+}
+/* TODO: Left/Right Margins defined in jsx */
 
+/* Game */
 .Game {
+  color: white;
   background-color: #282c34;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-  height: 80vh;
+  height: 87%;
+  width: 100%;
   overflow: hidden;
 }
+.Game #game {
+  padding: 20px;
+}
+.Game .container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 20px);
+  height: calc(87% - 20px);
+}
+.Game .item {
+  border: 1px solid white;
+  height: 25vh;
+  width: 33vw;
+}
 
+/* Footer */
 .Footer {
   background-color: #f1f1f1;
+  position: absolute;
+  text-align: left;
+  height: 3%;
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 20px;
-  height: 10%;
   overflow: hidden;
+}
+.Footer #type {
+  font-weight: bold;
+}
+.Footer #text {
+  font-weight: 400;
 }
 
 .About {
