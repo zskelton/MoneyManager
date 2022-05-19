@@ -1,10 +1,45 @@
+/* eslint-disable import/order */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import db from './Data/db';
+import { useLiveQuery } from 'dexie-react-hooks';
+
+function PlayerList() {
+  const players = useLiveQuery(() => db.game.toArray());
+
+  return (
+    <ul>
+      {players?.map((player) => (
+        <li key={player.id}>{player.name}</li>
+      ))}
+    </ul>
+  );
+}
 
 function Game() {
-  // eslint-disable-next-line no-unused-vars
   const [statusText, setStatusText] = useState('Running...');
+  const [player, setPlayer] = useState(null);
+  const [playerName, setPlayerName] = useState('');
+  const [bankAccount, setBankAccount] = useState(0);
+
+  async function addPlayer() {
+    try {
+      const id = await db.game.add({
+        name: playerName,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      setStatusText(`Player ${playerName} added with id ${id}`);
+      setPlayer(id);
+      setPlayerName('');
+    } catch (error) {
+      setStatusText(error.message);
+    }
+  }
+
   return (
     <div id="layout">
       {/* Header */}
@@ -14,10 +49,15 @@ function Game() {
         <div id="game">
           <div id="container-toprow" className="container">
             <div id="item_bank" className="item">
-              Bank
+              <p>Bank</p>
+              {'Name: '}
+              <input type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
+              <br />
+              <button type="button" onClick={addPlayer}>Add Player</button>
             </div>
             <div id="item_description" className="item">
-              Description
+              {/* Description */}
+              <PlayerList />
             </div>
             <div id="item_actions" className="item">
               Actions
