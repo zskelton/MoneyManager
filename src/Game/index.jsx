@@ -1,10 +1,51 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/order */
 import React, { useState } from 'react';
 import Header from './Layout/Header';
 import Footer from './Layout/Footer';
+import db from './Data/db';
+import { useLiveQuery } from 'dexie-react-hooks';
+
+function FriendList() {
+  const friends = useLiveQuery(
+    () => db.friends.toArray(),
+  );
+
+  return (
+    <ul>
+      {friends?.map((friend) => (
+        <li key={friend.id}>
+          {friend.name}
+          {' '}
+          -
+          {friend.age}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function Game() {
   // eslint-disable-next-line no-unused-vars
   const [statusText, setStatusText] = useState('Running...');
+
+  // db adds
+  const [name, setName] = useState('');
+  const [age, setAge] = useState(20);
+  const [status, setStatus] = useState('');
+
+  // db function
+  async function addFriend() {
+    try {
+      const id = await db.friends.add({ name, age });
+      setStatus(`Friend ${name} added with id ${id}`);
+      setName('');
+      setAge(21);
+    } catch (e) {
+      setStatus(`Error adding friend: ${e}`);
+    }
+  }
+
   return (
     <div id="layout">
       {/* Header */}
@@ -14,10 +55,23 @@ function Game() {
         <div id="game">
           <div id="container-toprow" className="container">
             <div id="item_bank" className="item">
-              Bank
+              {/* Bank */}
+              <div>
+                <p>{status}</p>
+                Name:
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                {' '}
+                <br />
+                Age:
+                <input type="text" value={age} onChange={(e) => setAge(e.target.value)} />
+                {' '}
+                <br />
+                <button type="button" onClick={addFriend}>Add Friend</button>
+              </div>
             </div>
             <div id="item_description" className="item">
-              Description
+              {/* Description */}
+              <FriendList />
             </div>
             <div id="item_actions" className="item">
               Actions
