@@ -3,45 +3,12 @@
 import React, { useState } from 'react';
 import Header from './Layout/Header';
 import Footer from './Layout/Footer';
-import db from './Data/db';
-import { useLiveQuery } from 'dexie-react-hooks';
 import {
   Actions, Bank, Choices, Date, Description, Goals, Living, Money, Work,
 } from './Components';
 
-function PlayerList() {
-  const players = useLiveQuery(() => db.game.toArray());
-
-  return (
-    <ul>
-      {players?.map((player) => (
-        <li key={player.id}>{player.name}</li>
-      ))}
-    </ul>
-  );
-}
-
 function Game() {
   const [statusText, setStatusText] = useState('Running...');
-  const [player, setPlayer] = useState(null);
-  const [playerName, setPlayerName] = useState('');
-  const [bankAccount, setBankAccount] = useState(0);
-
-  async function addPlayer() {
-    try {
-      const id = await db.game.add({
-        name: playerName,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-
-      setStatusText(`Player ${playerName} added with id ${id}`);
-      setPlayer(id);
-      setPlayerName('');
-    } catch (error) {
-      setStatusText(error.message);
-    }
-  }
 
   return (
     <div id="layout">
