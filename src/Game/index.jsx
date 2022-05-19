@@ -1,10 +1,13 @@
 /* eslint-disable import/order */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import Header from './Layout/Header';
+import Footer from './Layout/Footer';
 import db from './Data/db';
 import { useLiveQuery } from 'dexie-react-hooks';
+import {
+  Actions, Bank, Choices, Date, Description, Goals, Living, Money, Work,
+} from './Components';
 
 function PlayerList() {
   const players = useLiveQuery(() => db.game.toArray());
@@ -49,40 +52,35 @@ function Game() {
         <div id="game">
           <div id="container-toprow" className="container">
             <div id="item_bank" className="item">
-              <p>Bank</p>
-              {'Name: '}
-              <input type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
-              <br />
-              <button type="button" onClick={addPlayer}>Add Player</button>
+              <Bank />
             </div>
             <div id="item_description" className="item">
-              {/* Description */}
-              <PlayerList />
+              <Description />
             </div>
             <div id="item_actions" className="item">
-              Actions
+              <Actions />
             </div>
           </div>
           <div id="container-middlerow" className="container">
             <div id="item_goals" className="item">
-              Goals
+              <Goals />
             </div>
             <div id="item_work" className="item">
-              Work
+              <Work />
             </div>
             <div id="item_choices" className="item">
-              Choices
+              <Choices />
             </div>
           </div>
           <div id="container-bottomrow" className="container">
             <div id="item_date" className="item">
-              Date
+              <Date />
             </div>
             <div id="item_money" className="item">
-              Money
+              <Money />
             </div>
             <div id="item_living" className="item">
-              Living
+              <Living />
             </div>
           </div>
         </div>
