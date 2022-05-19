@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import Header from './Layout/Header';
+import Footer from './Layout/Footer';
 
 function Game() {
   // eslint-disable-next-line no-unused-vars
